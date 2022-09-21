@@ -50,37 +50,38 @@ func (c *SAPAPICaller) General(manufacturingOrder string) {
 	generalData, err := c.callProductionOrderSrvAPIRequirementGeneral("A_ProductionOrder_2", manufacturingOrder)
 	if err != nil {
 		c.log.Error(err)
-		return
+	} else {
+		c.log.Info(generalData)
 	}
-	c.log.Info(generalData)
 
 	componentData, err := c.callToComponent(generalData[0].ToComponent)
 	if err != nil {
 		c.log.Error(err)
-		return
+	} else {
+		c.log.Info(componentData)
 	}
-	c.log.Info(componentData)
 
 	itemData, err := c.callToItem(generalData[0].ToItem)
 	if err != nil {
 		c.log.Error(err)
-		return
+	} else {
+		c.log.Info(itemData)
 	}
-	c.log.Info(itemData)
 
 	operationData, err := c.callToOperation(generalData[0].ToOperation)
 	if err != nil {
 		c.log.Error(err)
-		return
+	} else {
+		c.log.Info(operationData)
 	}
-	c.log.Info(operationData)
 
 	statusData, err := c.callToStatus(generalData[0].ToStatus)
 	if err != nil {
 		c.log.Error(err)
-		return
+	} else {
+		c.log.Info(statusData)
 	}
-	c.log.Info(statusData)
+	return
 }
 
 func (c *SAPAPICaller) callProductionOrderSrvAPIRequirementGeneral(api, manufacturingOrder string) ([]sap_api_output_formatter.General, error) {
